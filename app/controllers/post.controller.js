@@ -43,3 +43,23 @@ exports.findOne = (req, res) => {
       });
     });
 };
+
+exports.update = (req, res) => {
+  const id = req.params.id;
+  Post.findByIdAndUpdate(id, req.body)
+    .then((result) => {
+      if (!result) {
+        res.status(404).send({
+          message: "Post not found with id " + id,
+        });
+      }
+      res.send({
+        message: "Post updated successfully",
+      });
+    })
+    .catch((err) => {
+      res.status(409).send({
+        message: err.message || "Something went wrong",
+      });
+    });
+};
