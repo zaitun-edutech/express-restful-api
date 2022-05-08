@@ -63,3 +63,23 @@ exports.update = (req, res) => {
       });
     });
 };
+
+exports.delete = (req, res) => {
+  const id = req.params.id;
+  Post.findByIdAndDelete(id)
+    .then((result) => {
+      if (!result) {
+        res.status(404).send({
+          message: "Post not found with id " + id,
+        });
+      }
+      res.send({
+        message: "Post deleted successfully!",
+      });
+    })
+    .catch((err) => {
+      res.status(409).send({
+        message: err.message || "Something went wrong to delete",
+      });
+    });
+};
