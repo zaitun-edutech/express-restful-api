@@ -22,6 +22,7 @@ db.mongoose
 app.get("/", (req, res) => {
   res.json({ message: "Hello World" });
 });
+require("./app/routes/post.routes")(app);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
